@@ -1,0 +1,25 @@
+h1 {
+    color: midnightblue;
+}
+
+body {
+    background-color: saddlebrown;
+}
+
+.button{
+    background-color: orange;
+    float: left;
+    height: 50px;
+    text-align: center;
+    width: 150px;
+}
+
+.table {
+    background-color: bisque;
+    text-align: center;
+    margin-left: 200px;
+}
+
+.table tr{
+    height: 35px;
+}
