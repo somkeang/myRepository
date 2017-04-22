@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>สร้างคำร้องใหม่</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="CreateReqCSS.css">
+    </head>
+    <body>
+        <center>
+            <h1>สร้างคำร้องใหม่</h1>
+            <form method="" action="GetRequestServlet">
+                
+                <div>
+                    <select name="types">
+                        <option>รูปแบบที่ 1</option>
+                        <option>รูปแบบที่ 2</option>
+                        <option>รูปแบบที่ 3</option>
+                        <option>รูปแบบที่ 4</option>
+                        <option>รูปแบบที่ 5</option>
+                        <option>รูปแบบที่ 6</option>
+                    </select> <br> <br>
+                    ชื่อ <input type="text" name="name" size="15"> 
+                    นามสกุล <input type="text" name="sname" size="15">
+                    รหัสประจำตัว <input type="text" name="id" size="10"> <br> <br>
+                    หัวข้อ <input type="text" name="subject" size="52">
+                    ส่งถึง <select name="types" >
+                        <option>อาจารย์ A</option>
+                        <option>อาจารย์ B</option>
+                        <option>อาจารย์ C</option>
+                        <option>อาจารย์ D</option>
+                        <option>อาจารย์ E</option>
+                        <option>อาจารย์ F</option>
+                        </select> <br> <br>
+                    รายละเอียด <br> <br>
+                    <textarea name="detail" rows="8" cols="75"></textarea> <br> <br>
+                </div>
+                
+                <div>
+                    <button type="submit" class="button"> ยืนยัน </button>
+            </form>
+                    <form method="" action="ToMainMenuServlet">
+                        <button type="submit" class="button"> ยกเลิก </button>
+                    </form>
+                </div>
+        </center>
+    </body>
+</html>
