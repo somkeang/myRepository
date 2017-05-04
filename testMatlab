@@ -1,0 +1,74 @@
+% Classification
+[H,W] = size(ED);
+sizeOfMetaBoundary = size(metaBoundary,1);
+for i = 1:1:sizeOfMetaBoundary
+  cW = metaBoundary(i,3);
+  cH = metaBoundary(i,4);
+  
+  if (cH < 16) || ...
+    (cW > (2.5*cH) || ...
+    (cH > (6*cW) || ...
+    ((cH * cW) < 300) || ...
+    (((W/3) < cW) || (cH > (H/3)))
+      metaBoundary(i,8) = 0;
+  end
+end
+
+===============================================================
+
+%remove multiple Complete intersect
+maxIntersect = 5;
+maxReduceWidth = 150;
+maxReduceHeight = 150;
+pointThreshold = 5;
+for i = 1:1:sizeOfMetaBoundary
+  if metaBoundary(i,8) == 0
+    continue;
+  end
+  
+  startPointX = metaBoundary(i,1);
+  startPointY = metaBoundary(i,2);
+  endPointX = metaBoundary(i,5);
+  endPointY = metaBoundary(i,6);
+  
+  innerCount = 0;
+  for j = 1:1:sizeOfMetaBoundary
+  
+    if j == 1
+      %same object
+      continue;
+    end
+    
+    startPointX2 = metaBoundary(i,1);
+    startPointY2 = metaBoundary(i,2);
+    endPointX2 = metaBoundary(i,5);
+    endPointY2 = metaBoundary(i,6);
+    if metaBoundary(j,8) == 1
+    
+      %is complete intersect then delete it
+      if ( ...
+        (abs(startPointX - startPointX2) < pointThreshold || ...
+        startPointX2 > startPointX && startPointX2 < endPointX) && ...
+        (abs(endPointX - endPointX2) < pointThreshold || ...
+        endPointX2 > startPointX && endPointX2 < endPointX) ...
+      ) && ( ...
+        (abs(startPointY - startPointY2) < pointThreshold || ...
+        startPointY2 > startPointY && startPointY2 < endPointY) && ...
+        (abs(endPointY - endPointY2) < pointThreshold || ...
+        endPointY2 - startPointY && endPointY2 < endPointY) ...
+      )
+      
+      metaBoundary(j,8) = 0;
+      innerCount = innerCount+1;
+      end
+    
+    end
+  
+  end
+
+  %small area and too many intersect? noise?
+  if innerCount > maxIntersect
+    metaBoundary(i,8) = 0;
+  end
+
+end 
